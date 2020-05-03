@@ -37,7 +37,7 @@ const Header = ({ currentUser }) => (
                     </>
 
                     :
-                    <Link className="option" to="/sign-in">SIGN IN</Link>
+                    <Link className="option" to="/signin">SIGN IN</Link>
             }
         </div>
     </div>
