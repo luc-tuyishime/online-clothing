@@ -22,7 +22,7 @@ const Header = ({ currentUser }) => (
                 currentUser ?
                     <>
                         <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
-                        <AvatarEditor
+                        {/* <AvatarEditor
                             className="profile-round"
                             image={currentUser.photoURL}
                             width={40}
@@ -33,7 +33,7 @@ const Header = ({ currentUser }) => (
                             scale={1.1}
                             rotate={0}
                             disableHiDPIScaling={true}
-                        />
+                        /> */}
                     </>
 
                     :
