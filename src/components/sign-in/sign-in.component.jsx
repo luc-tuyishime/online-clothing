@@ -6,6 +6,8 @@ import CustomButton from '../common/custom-button/custom-button.component';
 import { ReactComponent as LOGIN_WITH_GOOGLE } from '../../assets/brands-and-logotypes.svg';
 import { signInWithGoogle } from '../../firebase/firebase.utils';
 
+import { auth } from '../../firebase/firebase.utils';
+
 
 import './sign-in.styles.scss';
 
@@ -16,14 +18,21 @@ class SignIn extends Component {
         password: ''
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.setState({ email: '', password: '' });
-    }
-
-    handleChange = (e) => {
+     handleChange = (e) => {
         const { value, name } = e.target;
         this.setState({ [name]: value });
+    }
+
+    handleSubmit = async(e) => {
+        e.preventDefault();
+        const { email, password } = this.state;
+
+        try {
+          await auth.signInWithEmailAndPassword(email, password);
+          this.setState({ email: '', password: '' });
+        } catch(error){
+          console.log(error);
+        }
     }
 
     render() {

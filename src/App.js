@@ -27,7 +27,6 @@ class App extends Component {
               ...Snapshot.data() //to get the data from the user property.
             }
           }) 
-          console.log(this.state);
         })
       }
       this.setState({ currentUser: userAuth });
