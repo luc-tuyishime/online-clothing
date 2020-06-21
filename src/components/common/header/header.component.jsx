@@ -1,13 +1,16 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-import { auth } from '../../../firebase/firebase.utils';
-import { ReactComponent as Logo } from '../../../assets/original.svg';
-import AvatarEditor from 'react-avatar-editor';
-import './header.styles.scss';
+import { auth } from "../../../firebase/firebase.utils";
+import { ReactComponent as Logo } from "../../../assets/original.svg";
 
-const Header = ({ currentUser }) => (
+import CartIcon from "../../cart-icon/cart-icon.component";
+import CartDropdown from "../../cart-dropdown/cart-dropdown.component";
+import AvatarEditor from "react-avatar-editor";
+import "./header.styles.scss";
+
+const Header = ({ currentUser, hidden }) => (
     <div className="header">
         <Link className="logo-container" to="/">
             <Logo className="logo" />
@@ -19,11 +22,12 @@ const Header = ({ currentUser }) => (
             <Link className="option" to="/shop">
                 CONTACT
             </Link>
-            {
-                currentUser ?
-                    <>
-                        <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
-                        {/* <AvatarEditor
+            {currentUser ? (
+                <>
+                    <div className="option" onClick={() => auth.signOut()}>
+                        SIGN OUT
+                    </div>
+                    {/* <AvatarEditor
                             className="profile-round"
                             image={currentUser.photoURL}
                             width={40}
@@ -35,17 +39,21 @@ const Header = ({ currentUser }) => (
                             rotate={0}
                             disableHiDPIScaling={true}
                         /> */}
-                    </>
-
-                    :
-                    <Link className="option" to="/signin">SIGN IN</Link>
-            }
+                </>
+            ) : (
+                <Link className="option" to="/signin">
+                    SIGN IN
+                </Link>
+            )}
+            <CartIcon />
+            {hidden ? null : <CartDropdown />}
         </div>
     </div>
-)
+);
 
-const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser
-})
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+    currentUser,
+    hidden
+});
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps)(Header);
