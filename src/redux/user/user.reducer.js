@@ -1,7 +1,7 @@
 import { UserActionsTypes } from "./user.types.js";
 
 const INITIAL_STATE = {
-    currentUser: null,
+    currentUser: null
 };
 
 const userReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -10,7 +10,7 @@ const userReducer = (state = INITIAL_STATE, { type, payload }) => {
             console.log("1", payload);
             return {
                 ...state,
-                currentUser: payload,
+                currentUser: payload
             };
 
         default:
