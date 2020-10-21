@@ -12,3 +12,11 @@ export const selectCartItemsCount = createSelector([selectCartItems], (cartItems
         0
     )
 ); // 0 represente the initial accumulator value
+
+export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
+    cartItems.reduce(
+        (accumulatedQuantity, cartItem) =>
+            accumulatedQuantity + cartItem.quantity + cartItem.price,
+        0
+    )
+);
